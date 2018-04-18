@@ -4,14 +4,14 @@ class ChatBar extends Component {
   constructor (props) {
     super();
     this.state = {
-      userName: ''
+      userName: 'Anonymous'
     }
 
-    this.onSubmit = this.onSubmit.bind(this);
-    this.submitUserName = this.submitUserName.bind(this);
+    this.onSubmitMessage = this.onSubmitMessage.bind(this);
+    this.changeUserName = this.changeUserName.bind(this);
   }
 
-  onSubmit = (e) => {
+  onSubmitMessage = (e) => {
     if (e.keyCode === 13) {
       const textMessage = e.target.value;
       console.log(textMessage);
@@ -20,14 +20,13 @@ class ChatBar extends Component {
     }
   }
 
-  submitUserName = (e) => {
-    const userName = e.target.value;
-    console.log('CHATBAR', userName);
-    this.setState({userName: userName});
-
-    if (e.keyCode === 13) {
+  changeUserName = (e) => {
+    if (e.target.value === '') {
+      this.setState({userName: 'Anonymous'});
+    } else {
       const userName = e.target.value;
-      console.log(userName);
+      console.log('CHATBAR', userName);
+      this.setState({userName: userName});
       this.props.onUserNameChange(userName);
     }
   }
@@ -42,14 +41,12 @@ class ChatBar extends Component {
       <input  className="chatbar-username"
               type = 'text'
               name = 'userName'
-              value = {this.state.userName}
-              onChange = {this.submitUserName}
-              onKeyUp = {this.submitUserName}
+              onBlur = {this.changeUserName}
               placeholder="Your Name (Optional)"
               />
       <input  className="chatbar-message"
               name = 'textMessage'
-              onKeyUp = {this.onSubmit}
+              onKeyUp = {this.onSubmitMessage}
               placeholder="Type a message and hit ENTER"
               />
     </footer>);
