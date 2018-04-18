@@ -6,7 +6,6 @@ class ChatBar extends Component {
     this.state = {
       userName: 'Anonymous'
     }
-
     this.onSubmitMessage = this.onSubmitMessage.bind(this);
     this.changeUserName = this.changeUserName.bind(this);
   }
@@ -21,20 +20,22 @@ class ChatBar extends Component {
   }
 
   changeUserName = (e) => {
+    const userName = e.target.value;
+    console.log('Target USERNAME', userName);
+    console.log('STATE USERNAME', this.state.userName);
+
     if (e.target.value === '') {
       this.setState({userName: 'Anonymous'});
     } else {
-      const userName = e.target.value;
-      console.log('CHATBAR', userName);
-      this.setState({userName: userName});
-      this.props.onUserNameChange(userName);
-    }
+        console.log('CHATBAR', userName);
+        this.setState({userName: userName});
+        this.props.onUserNameChange(userName);
+      }
   }
+
 
   render() {
     console.log('Rendering <ChatBar/>');
-
-
 
     return (
     <footer className="chatbar">

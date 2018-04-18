@@ -18,17 +18,22 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
 
   ws.onmessage = (msg) => {
+
+
     const uid = uuidv4();
     const text = JSON.parse(msg.data);
-    const newMsg = JSON.stringify({id: uid, username: text.username, content: text.content});
+    const parsedType = text.type;
+    const newMsg = JSON.stringify({type: parsedType === "postMessage" ? "incomingMessage" : "incomingNotification",
+                                  id: uid, username: text.username,
+                                  content: text.content});
 
-    wss.clients.forEach(function (client) {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(newMsg);
-        console.log("Message", newMsg);
-      }
-    });
-    console.log(`User ${text.username} said ${text.content}`)
+
+      wss.clients.forEach(function (client) {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(newMsg);
+        }
+      });
+
   }
 
   ws.on('close', () => console.log('Client disconnected'));

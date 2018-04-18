@@ -6,13 +6,12 @@ class App extends Component {
   constructor () {
     super();
     this.state = {
-
-      currentUser: {name: ''},
-      messages: []
+      currentUser: {name: 'Anonymous'},
+      messages: [],
     };
+
     this.addMessage = this.addMessage.bind(this);
     this.onUserNameChange = this.onUserNameChange.bind(this);
-
   }
 
   componentDidMount() {
@@ -21,41 +20,66 @@ class App extends Component {
 
     this.socket.onmessage = (msg) => {
       const newMsg = JSON.parse(msg.data);
-      const oldMessages = this.state.messages;
-      const newMessages = [...oldMessages, {id: newMsg.id, username: newMsg.username, content: newMsg.content}]
-      this.setState({messages: newMessages});
+      console.log('Socket', newMsg.type)
+      switch(newMsg.type) {
+
+        case 'incomingMessage':
+          const oldMessages = this.state.messages;
+          const newMessages = [...oldMessages, { type: newMsg.type, id: newMsg.id, username: newMsg.username, content: newMsg.content }]
+          this.setState({messages: newMessages});
+          break;
+
+        case 'incomingNotification':
+          const stateMessages = this.state.messages;
+          const newNotification = [...stateMessages, { type: newMsg.type, id: newMsg.id, username: newMsg.username, content: newMsg.content }]
+
+          console.log('NOTIFICATION MESSAGE:', newMsg);
+          this.setState({ messages: newNotification });
+          break;
+        default:
+          throw new Error('Unknown event type ' + newMsg.type);
+
+      }
         console.log('Message', msg);
         console.log('newMsg: ', newMsg);
-      }
+    }
         console.log('Connect to server');
-
 
     setTimeout(() => {
       console.log("Simulating incoming message");
-      // Add a new message to the list of messages in the data store
       const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
       const messages = this.state.messages.concat(newMessage)
-      // Update the state of the app component.
-      // Calling setState will trigger a call to render() in App and all child components.
       this.setState({messages: messages})
     }, 3000);
-
-
   }
 
-  addMessage(message, username) {
+  addMessage(message, username, type) {
     console.log("Sending Message");
-    var msg = {
-        type: "sendMessage",
-        content: message,
-        username: username
-        }
+      let msg = {
+          type: "postMessage",
+          content: message,
+          username: username
+      }
         this.socket.send(JSON.stringify(msg));
+        console.log(msg);
   }
 
   onUserNameChange (username) {
-    console.log("NAME CHAAAANGE", username);
-    this.setState( {currentUser: username});
+    console.log("NEW", username)
+    console.log('OLD', this.state.currentUser.name);
+    let newName = username;
+    let oldName = this.state.currentUser.name;
+
+    if (newName !== oldName) {
+      let notification = {
+        type: 'postNotification',
+        content: `**User: ${oldName}** changed their name to **User: ${newName}**`,
+      }
+      this.socket.send(JSON.stringify(notification));
+
+    }
+
+    this.setState({currentUser: {name: newName }});
   }
 
   render() {
