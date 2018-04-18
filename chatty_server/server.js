@@ -1,6 +1,7 @@
 // server.js
 
 const express = require('express');
+const WebSocket = require('ws');
 const SocketServer = require('ws').Server;
 const uuidv4 = require('uuid/v4');
 // Set the port to 3001
@@ -14,15 +15,6 @@ const server = express()
 
 // Create the WebSockets server
 const wss = new SocketServer({ server });
-
-wss.broadcast = (data) => {
-  wss.clients.forEach(function (client) {
-    if (client.readyState === WebSocket.OPEN) {
-
-    }
-  })
-}
-
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
@@ -34,13 +26,17 @@ wss.on('connection', (ws) => {
   //   ws.send(`User ${message.username} 'said' ${message.content}`);
   //   console.log(`User ${message.username} 'said' ${message.content}`);
   // }
-
   ws.onmessage = (msg) => {
     const uid = uuidv4();
     const text = JSON.parse(msg.data);
-    const newMsg = {id: uid, username: text.username, content: text.content};
-    console.log(newMsg);
-    ws.send('Message:', newMsg);
+    const newMsg = JSON.stringify({id: uid, username: text.username, content: text.content});
+
+    wss.clients.forEach(function (client) {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(newMsg);
+        console.log("Message", newMsg);
+      }
+  });
     console.log(`User ${text.username} said ${text.content}`)
   }
 

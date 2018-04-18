@@ -18,10 +18,17 @@ class App extends Component {
   componentDidMount() {
     console.log("componentDidMount <App />");
     this.socket = new WebSocket('ws://localhost:3001');
+
     this.socket.onmessage = (msg) => {
-        console.log("App onmessage")
+      const newMsg = JSON.parse(msg.data);
+      const oldMessages = this.state.messages;
+      const newMessages = [...oldMessages, {id: newMsg.id, username: newMsg.username, content: newMsg.content}]
+      this.setState({messages: newMessages})
+        console.log('Message', msg);
+        console.log('newMsg: ', newMsg);
+        this.setState({ messages: newMessages });
         }
-    console.log('Connect to server');
+        console.log('Connect to server');
 
 
     setTimeout(() => {
@@ -46,9 +53,7 @@ class App extends Component {
         }
         this.socket.send(JSON.stringify(msg));
   }
-    // const oldMessages = this.state.messages;
-    // const newMessage = [...oldMessages, {id: 12123, username: this.state.currentUser.name, content: message}]
-    // this.setState({messages: newMessage})
+
   render() {
     console.log('Rendering <App/>');
         return (

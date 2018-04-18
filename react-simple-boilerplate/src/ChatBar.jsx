@@ -13,7 +13,6 @@ class ChatBar extends Component {
       this.props.onEnter(textMessage);
       e.target.value = '';
     }
-
   }
 
   render() {
