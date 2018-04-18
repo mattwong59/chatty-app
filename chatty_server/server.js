@@ -25,7 +25,7 @@ wss.on('connection', (ws) => {
         client.send(newMsg);
         console.log("Message", newMsg);
       }
-  });
+    });
     console.log(`User ${text.username} said ${text.content}`)
   }
 
