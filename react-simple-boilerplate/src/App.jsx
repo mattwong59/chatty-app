@@ -7,13 +7,13 @@ class App extends Component {
     super();
     this.state = {
 
-      currentUser: {name: "Bob"},
+      currentUser: {name: ''},
       messages: []
     };
     this.addMessage = this.addMessage.bind(this);
+    this.onUserNameChange = this.onUserNameChange.bind(this);
+
   }
-
-
 
   componentDidMount() {
     console.log("componentDidMount <App />");
@@ -23,11 +23,10 @@ class App extends Component {
       const newMsg = JSON.parse(msg.data);
       const oldMessages = this.state.messages;
       const newMessages = [...oldMessages, {id: newMsg.id, username: newMsg.username, content: newMsg.content}]
-      this.setState({messages: newMessages})
+      this.setState({messages: newMessages});
         console.log('Message', msg);
         console.log('newMsg: ', newMsg);
-        this.setState({ messages: newMessages });
-        }
+      }
         console.log('Connect to server');
 
 
@@ -44,14 +43,19 @@ class App extends Component {
 
   }
 
-  addMessage(message) {
+  addMessage(message, username) {
     console.log("Sending Message");
     var msg = {
         type: "sendMessage",
         content: message,
-        username: this.state.currentUser.name
+        username: username
         }
         this.socket.send(JSON.stringify(msg));
+  }
+
+  onUserNameChange (username) {
+    console.log("NAME CHAAAANGE", username);
+    this.setState( {currentUser: username});
   }
 
   render() {
@@ -59,7 +63,9 @@ class App extends Component {
         return (
           <div>
             <MessageList messages= {this.state.messages} />
-            <ChatBar username = {this.state.currentUser.name} onEnter = {this.addMessage} />
+            <ChatBar username = {this.state.currentUser.name}
+            onUserNameChange = {this.onUserNameChange}
+            onMessageSubmit = {this.addMessage} />
           </div>
         );
     }
