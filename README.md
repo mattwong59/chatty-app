@@ -33,6 +33,6 @@ Welcome to Chatty.  Chatty is a web app that utilizes React, . The app allows us
 
 ## Final prdouct
 
-!["Home Page"](https://github.com/popnfresh234/decider_midterm/blob/master/docs/decider-home-page.png)
-!["First Message Page"](https://github.com/popnfresh234/decider_midterm/blob/master/docs/decider-links-page.png)
-!["Two Users"](https://github.com/popnfresh234/decider_midterm/blob/master/docs/decider-options-page.png)
+!["Home Page"](https://github.com/mattwong59/chatty-app/blob/master/docs/chatty-homepage.png)
+!["First Message Page"](https://github.com/mattwong59/chatty-app/blob/master/docs/chatty-first-message.png)
+!["Two Users"](https://github.com/mattwong59/chatty-app/blob/master/docs/chatty-2users.png)
