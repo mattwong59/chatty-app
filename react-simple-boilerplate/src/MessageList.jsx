@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Message from './Message.jsx';
 import Notification from './Notification.jsx';
 
-class MessageList extends Component {
+export default class MessageList extends Component {
   render(props) {
     console.log('Rendering <MessageList />');
 
@@ -36,5 +36,3 @@ class MessageList extends Component {
     );
   }
 }
-
-export default MessageList;

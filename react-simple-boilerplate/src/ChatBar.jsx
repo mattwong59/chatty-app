@@ -21,9 +21,6 @@ class ChatBar extends Component {
 
   changeUserName = (e) => {
     const userName = e.target.value;
-    console.log('Target USERNAME', userName);
-    console.log('STATE USERNAME', this.state.userName);
-
     if (e.target.value === '') {
       this.setState({userName: 'Anonymous'});
     } else {
@@ -33,10 +30,8 @@ class ChatBar extends Component {
       }
   }
 
-
   render() {
     console.log('Rendering <ChatBar/>');
-
     return (
     <footer className="chatbar">
       <input  className="chatbar-username"

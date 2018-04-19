@@ -1,5 +1,4 @@
 // server.js
-
 const express = require('express');
 const WebSocket = require('ws');
 const SocketServer = require('ws').Server;
@@ -32,14 +31,15 @@ wss.on('connection', (ws) => {
   broadcastUserCount();
 
   ws.onmessage = (msg) => {
-
     const uid = uuidv4();
     const text = JSON.parse(msg.data);
     const parsedType = text.type;
-    const newMsg = JSON.stringify({type: parsedType === "postMessage" ? "incomingMessage" : "incomingNotification",
-                                  id: uid,
-                                  username: text.username,
-                                  content: text.content});
+    const newMsg = JSON.stringify({
+      type: parsedType === "postMessage" ? "incomingMessage" : "incomingNotification",
+      id: uid,
+      username: text.username,
+      content: text.content
+    });
 
       wss.clients.forEach(function (client) {
         if (client.readyState === WebSocket.OPEN) {
