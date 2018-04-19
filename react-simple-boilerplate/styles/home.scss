@@ -1,12 +1,12 @@
-    @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
-    @import url('https://fonts.googleapis.com/css?family=Satisfy|Luckiest+Guy');
+
+    @import url('https://fonts.googleapis.com/css?family=Julius+Sans+One|Work+Sans|Black+Ops+One');
 
     @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
     body {
       background: white;
       color: black;
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Work Sans', sans-serif;
       font-size: 14px;
       margin: 70px 0;
     }
@@ -25,6 +25,7 @@
     .chatbar-message,
     .chatbar-username {
       border: 1px solid black;
+      border-radius: 3px;
       display: block;
       height: 40px;
       line-height: 40px;
@@ -81,7 +82,7 @@
       color: inherit;
       display: block;
       float: left;
-      font-family: 'Luckiest Guy';
+      font-family: 'Black Ops One', sans-serif;
       font-weight: 700;
       font-size: 28px;
       height: 60px;
@@ -93,4 +94,8 @@
     p {
       float: right;
       margin-top: 20px;
+    }
+
+    i {
+      margin: 0 1rem 0 1rem;
     }
