@@ -1,13 +1,14 @@
 # Decider
 
-Welcome to Chatty.  Chatty is a web app that utilizes React, . The app allows users to create a poll, share it with their friends, and view the results of their friend's votes.
+Welcome to Chatty. Chatty is a web app that utilizes React, WebSockets, and Express. The app allows users to send/receive messages to each other without the need for refreshing the page. Chatty was built as part of Lighthouse Labs Web Development Course.
 
 ## Getting Started
 
 1. Fork this repository, then clone your fork of this repository.a
 2. Install dependencies using the `npm install` command.
-3. Start the web server using the `npm run local` command. The app will be served at <http://localhost:3000/>.
-4. Go to <http://localhost:3000/> in your browser.
+3. Start the Chatty App server from within chatty_server by using the command `node server.js`. The app will be listening on <http://localhost:3001/>.
+4. Start the web socket server using the `npm start` command from within react-simple-boilerplate. The app will be served at <http://localhost:3000/>.
+5. Go to <http://localhost:3000/> in your browser.
 
 ## Dependencies
 
