@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import NavBar from './NavBar.jsx';
 import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 
@@ -8,6 +9,7 @@ class App extends Component {
     this.state = {
       currentUser: {name: 'Anonymous'},
       messages: [],
+      userCount: 0
     };
 
     this.addMessage = this.addMessage.bind(this);
@@ -32,10 +34,14 @@ class App extends Component {
         case 'incomingNotification':
           const stateMessages = this.state.messages;
           const newNotification = [...stateMessages, { type: newMsg.type, id: newMsg.id, username: newMsg.username, content: newMsg.content }]
-
-          console.log('NOTIFICATION MESSAGE:', newMsg);
           this.setState({ messages: newNotification });
           break;
+
+        case 'incomingUserCount':
+          this.setState( {userCount: newMsg.numUsers})
+          console.log('NOTIFICATION MESSAGE:', newMsg);
+          break;
+
         default:
           throw new Error('Unknown event type ' + newMsg.type);
 
@@ -86,6 +92,7 @@ class App extends Component {
     console.log('Rendering <App/>');
         return (
           <div>
+            <NavBar userCount={this.state.userCount}/>
             <MessageList messages= {this.state.messages} />
             <ChatBar username = {this.state.currentUser.name}
             onUserNameChange = {this.onUserNameChange}

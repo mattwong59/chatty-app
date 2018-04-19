@@ -12,29 +12,45 @@ const server = express()
 // Create the WebSockets server
 const wss = new SocketServer({ server });
 
+wss.broadcast = function broadcast(data) {
+  wss.clients.forEach(function (client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(data);
+    }
+  })
+}
 
+const broadcastUserCount = () => {
+  wss.broadcast (JSON.stringify({
+    type: 'incomingUserCount',
+    numUsers: wss.clients.size
+  }));
+}
 
 wss.on('connection', (ws) => {
-  console.log('Client connected');
+
+  broadcastUserCount();
 
   ws.onmessage = (msg) => {
-
 
     const uid = uuidv4();
     const text = JSON.parse(msg.data);
     const parsedType = text.type;
     const newMsg = JSON.stringify({type: parsedType === "postMessage" ? "incomingMessage" : "incomingNotification",
-                                  id: uid, username: text.username,
+                                  id: uid,
+                                  username: text.username,
                                   content: text.content});
-
 
       wss.clients.forEach(function (client) {
         if (client.readyState === WebSocket.OPEN) {
           client.send(newMsg);
         }
       });
-
   }
 
-  ws.on('close', () => console.log('Client disconnected'));
+  ws.on('close', () => {
+    console.log('Client disconnected');
+    broadcastUserCount();
+    });
+
 });

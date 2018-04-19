@@ -1,4 +1,6 @@
     @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
+    @import url('https://fonts.googleapis.com/css?family=Satisfy|Luckiest+Guy');
+
     @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
     body {
@@ -10,7 +12,7 @@
     }
 
     .chatbar {
-      background: tomato;
+      background: #07d284;
       border-top: 1px solid black;
       bottom: 0;
       display: flex;
@@ -65,7 +67,7 @@
     }
 
     .navbar {
-      background: tomato;
+      background: #07d284;
       border-bottom: 1px solid black;
       height: 60px;
       left: 0;
@@ -79,10 +81,16 @@
       color: inherit;
       display: block;
       float: left;
+      font-family: 'Luckiest Guy';
       font-weight: 700;
       font-size: 28px;
       height: 60px;
       line-height: 60px;
       padding: 0 10px;
       text-decoration: none;
+    }
+
+    p {
+      float: right;
+      margin-top: 20px;
     }
