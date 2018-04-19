@@ -1,4 +1,4 @@
-# Decider
+# Chatty
 
 Welcome to Chatty. Chatty is a web app that utilizes React, WebSockets, and Express. The app allows users to send/receive messages to each other without the need for refreshing the page. Chatty was built as part of Lighthouse Labs Web Development Course.
 
