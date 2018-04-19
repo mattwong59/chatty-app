@@ -4,7 +4,7 @@ Welcome to Chatty. Chatty is a web app that utilizes React, WebSockets, and Expr
 
 ## Getting Started
 
-1. Fork this repository, then clone your fork of this repository.a
+1. Fork this repository, then clone your fork of this repository.
 2. Install dependencies using the `npm install` command.
 3. Start the Chatty App server from within chatty_server by using the command `node server.js`. The app will be listening on <http://localhost:3001/>.
 4. Start the web socket server using the `npm start` command from within react-simple-boilerplate. The app will be served at <http://localhost:3000/>.
