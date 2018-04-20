@@ -47,7 +47,6 @@ function getRandomColour() {
   ws.send(JSON.stringify(colorObject));
 
   broadcastUserCount();
-  console.log(ws);
 
   ws.onmessage = (msg) => {
     const uid = uuidv4();

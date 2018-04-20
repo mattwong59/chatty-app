@@ -7,7 +7,7 @@ export default class MessageList extends Component {
     console.log('Rendering <MessageList />');
 
     const individualMessage = this.props.messages.map((message) => {
-      console.log('MAP MSG', message);
+
       if(message.type === 'incomingMessage') {
         return (
           <Message

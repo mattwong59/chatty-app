@@ -81,7 +81,7 @@ class App extends Component {
       this.socket.send(JSON.stringify(notification));
     }
     this.setState({currentUser: {name: newName}});
-    console.log("CHECK", this.state);
+
   }
 
   render() {
