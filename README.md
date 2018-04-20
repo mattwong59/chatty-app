@@ -37,3 +37,4 @@ Welcome to Chatty. Chatty is a web app that utilizes React, WebSockets, and Expr
 !["Home Page"](https://github.com/mattwong59/chatty-app/blob/master/docs/chatty-homepage.png)
 !["First Message Page"](https://github.com/mattwong59/chatty-app/blob/master/docs/chatty-first-message.png)
 !["Two Users"](https://github.com/mattwong59/chatty-app/blob/master/docs/chatty-2users.png)
+!["Picture Message"](https://github.com/mattwong59/chatty-app/blob/master/docs/chatty-picture-message.png)
