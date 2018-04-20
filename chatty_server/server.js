@@ -11,6 +11,8 @@ const server = express()
 // Create the WebSockets server
 const wss = new SocketServer({ server });
 
+
+
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function (client) {
     if (client.readyState === WebSocket.OPEN) {
@@ -28,7 +30,24 @@ const broadcastUserCount = () => {
 
 wss.on('connection', (ws) => {
 
+function getRandomColour() {
+  let newColor = '';
+  let colors = ['#feca57', '#00d2d3', '#ff9ff3', '#ff6b6b', '#48dbfb', '#32ff7e', '#cd84f1'];
+    for (let i = 0; i < colors.length; i++) {
+      newColor = colors[Math.floor(Math.random() * colors.length)];
+  }
+  return newColor;
+}
+
+  const colorObject = {
+    type: 'incomingUserColor',
+    color: getRandomColour()
+  }
+
+  ws.send(JSON.stringify(colorObject));
+
   broadcastUserCount();
+  console.log(ws);
 
   ws.onmessage = (msg) => {
     const uid = uuidv4();
@@ -38,8 +57,11 @@ wss.on('connection', (ws) => {
       type: parsedType === "postMessage" ? "incomingMessage" : "incomingNotification",
       id: uid,
       username: text.username,
-      content: text.content
+      content: text.content,
+      color: text.color,
+      image: text.image
     });
+    console.log('newMsg', newMsg)
 
       wss.clients.forEach(function (client) {
         if (client.readyState === WebSocket.OPEN) {

@@ -9,7 +9,8 @@ class App extends Component {
     this.state = {
       currentUser: {name: 'Anonymous'},
       messages: [],
-      userCount: 0
+      userCount: 0,
+      userColor: ''
     };
     this.addMessage = this.addMessage.bind(this);
     this.onUserNameChange = this.onUserNameChange.bind(this);
@@ -22,7 +23,7 @@ class App extends Component {
 
       const newMsg = JSON.parse(msg.data);
       const stateMessages = this.state.messages;
-      const newNotification = [...stateMessages, { type: newMsg.type, id: newMsg.id, username: newMsg.username, content: newMsg.content }]
+      const newNotification = [...stateMessages, { image: newMsg.image, type: newMsg.type, id: newMsg.id, username: newMsg.username, content: newMsg.content, color: newMsg.color }]
 
       switch(newMsg.type) {
 
@@ -33,6 +34,10 @@ class App extends Component {
 
         case 'incomingUserCount':
           this.setState( {userCount: newMsg.numUsers})
+          break;
+
+        case 'incomingUserColor':
+          this.setState ({userColor: newMsg.color})
           break;
 
         default:
@@ -49,12 +54,17 @@ class App extends Component {
     }, 3000);
   }
 
-  addMessage(message, username, type) {
+  addMessage(message, username, type, color) {
     console.log("Sending Message");
+    let url = message.match(/(http)?s?:?(\/\/[^“’]*\.(?:png|jpg|jpeg|gif|png|svg))/g);
+    message = message.split(url);
+
       let msg = {
           type: "postMessage",
           content: message,
-          username: username
+          username: username,
+          color: this.state.userColor,
+          image: url
       }
         this.socket.send(JSON.stringify(msg));
   }
@@ -70,7 +80,8 @@ class App extends Component {
       }
       this.socket.send(JSON.stringify(notification));
     }
-    this.setState({currentUser: {name: newName }});
+    this.setState({currentUser: {name: newName}});
+    console.log("CHECK", this.state);
   }
 
   render() {

@@ -15,6 +15,8 @@ export default class MessageList extends Component {
           className = 'message'
           username = {message.username}
           content = {message.content}
+          color = {message.color}
+          image = {message.image}
           />);
       } else {
           return (
