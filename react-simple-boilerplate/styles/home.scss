@@ -4,15 +4,20 @@
     @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
     body {
-      background: #20364F;
+      background: #274A8D;
       color: white;
       font-family: 'Work Sans', sans-serif;
-      font-size: 16px;
+      font-size: 20px;
       margin: 70px 0;
     }
 
+    div#huntr-react-container {
+      padding-top: 3rem;
+      
+    }
+
     .chatbar {
-      background: #E77D55;
+      background: #F8FAF9;
       border-top: 1px solid black;
       bottom: 0;
       display: flex;
@@ -43,7 +48,7 @@
 
     .message {
       display: flex;
-      padding: 5px;
+      padding: 5px 10px 5px 25px;
     }
 
     .message.system {
@@ -68,23 +73,28 @@
     }
 
     .navbar {
-      background: #E77D55;
+      background: #F8FAF9;
+      color: #C8ABB9;
       border-bottom: 1px solid black;
-      height: 60px;
+      height: 90px;
       left: 0;
+      display: flex;
       padding: 0 10px;
       position: fixed;
       right: 0;
       top: 0;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .navbar-brand {
       color: inherit;
       display: block;
       float: left;
-      font-family: 'Black Ops One', sans-serif;
+      font-family: 'Handlee', cursive;
+
       font-weight: 700;
-      font-size: 28px;
+      font-size: 2.5rem;
       height: 60px;
       line-height: 60px;
       padding: 0 10px;
