@@ -17,6 +17,9 @@
 
     span.notification-content {
       color: #ffe476;
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
     }
 
     .chatbar {
@@ -70,6 +73,9 @@
       overflow: hidden;
       margin: 5px;
       padding: 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .message-content {
