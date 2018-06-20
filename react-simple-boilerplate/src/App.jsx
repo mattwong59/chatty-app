@@ -76,7 +76,7 @@ class App extends Component {
     if (newName !== oldName) {
       let notification = {
         type: 'postNotification',
-        content: `**User: ${oldName}** changed their name to **User: ${newName}**`,
+        content: `** User: "${oldName}" changed their name to "${newName}" **`,
       }
       this.socket.send(JSON.stringify(notification));
     }
